@@ -1,20 +1,62 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" >
-<head>
-    <title>Spring Security Example </title>
-</head>
-<body>
-add new user
-${msg}
-<form action="/registration" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><label> Name: <input type="text" name="name"/> </label></div>
-    <div><label> surname: <input type="text" name="surname"/> </label></div>
-    <div><label> Number of DL: <input type="number" name="driving_license_number"/> </label></div>
-    <div><label> Date of DL: <input type="date" name="driving_license_date"/> </label></div>
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-</body>
-</html>
+<#import "parts/common.ftlh" as c>
+
+<@c.html>
+
+    <@c.header></@c.header>
+    <div class="section mt-5 p-md-5 align-items-center" style="padding-top: 200px">
+        <div class="container mt-5 text-light ">
+            <p> ${msg} </p>
+                <form action="/registration" method="post" id="RegForm">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                    Почта :
+                                </label>
+                                <input name="username" type="email" class="form-control bg-dark w-75 text-light" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+<#--                                <small id="emailHelp" class="form-text text-muted">Конфиденциальность клиентов превыше всего</small>-->
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">
+                                    Пароль :
+                                </label>
+                                <input type="password" name="password" class="form-control bg-dark w-75 text-light" id="exampleInputPassword1"/>
+                                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="nameF">
+                                    Имя :
+                                </label>
+                                <input name="name" type="text" class="form-control bg-dark w-75 text-light" id="nameF"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="surF">
+                                    Фамилия :
+                                </label>
+                                <input name="surname" type="text" class="form-control bg-dark w-75 text-light" id="surF"/>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="numF">
+                                    Номер водительского удостоверения  :
+                                </label>
+                                <input name="driving_license_number" type="number" class="form-control bg-dark w-75 text-light" id="numF"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="dateF">
+                                    Дата выдачи водительского удостоверения  :
+                                </label>
+                                <input name="driving_license_date" type="date" class="form-control bg-dark w-75 text-light" id="dateF"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center"><input type="submit" value="Зарегестрироваться" class="btn btn-primary btn-dark " id="sendForm"/></div>
+                </form>
+        </div>
+    </div>
+
+    <@c.footer></@c.footer>
+</@c.html>

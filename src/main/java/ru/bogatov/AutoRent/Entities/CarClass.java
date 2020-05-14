@@ -6,20 +6,21 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "car_classes")
 @Data
-@Table(name = "cities")
-public class City {
+public class CarClass {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Integer id;
     @Column(name = "name")
     private String name;
-    @Column(name = "available_cars")
-    private String availableCars;
+    @Column(name = "description")
+    private String description;
+    @Column(name="required_age")
+    private Integer required_age;
 
     @OneToMany( fetch = FetchType.EAGER)
-    private Set<Punct> puncts;
+    private Set<Car> cars;
 
-    public City(){}
+    public CarClass(){}
 }

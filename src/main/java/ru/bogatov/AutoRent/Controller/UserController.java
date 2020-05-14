@@ -20,7 +20,7 @@ public class UserController {
     @GetMapping("/registration")
     public String registration(Model model){
 
-        model.addAttribute("msg","hi");
+        model.addAttribute("msg","");
         return "registration";
     }
 
@@ -29,7 +29,7 @@ public class UserController {
         User userBD = usersRepo.findByUsername(user.getUsername());
 
         if(userBD != null){
-            model.addAttribute("msg","User already exists");
+            model.addAttribute("msg","Такой пользователь уже существует");
             return "registration";
         }
 

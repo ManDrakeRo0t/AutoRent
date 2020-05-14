@@ -10,22 +10,10 @@ import ru.bogatov.AutoRent.Entities.City;
 @Controller
 
 public class MainController {
-    @Autowired
-    CitiesRepo citiesRepo;
 
     @GetMapping("")
-    public String home(Model model){
-        Iterable<City> cities = citiesRepo.findAll();
-
-        model.addAttribute("cq",cities);
+    public String home(){
         return "home";
     }
-
-    @GetMapping("/main")
-    public String main(){
-
-        return "main";
-    }
-
 
 }

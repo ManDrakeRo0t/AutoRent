@@ -7,19 +7,17 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "cities")
-public class City {
+@Table(name = "services")
+public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Integer id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "available_cars")
-    private String availableCars;
-
+    private Integer price;
+    private String description;
     @OneToMany( fetch = FetchType.EAGER)
-    private Set<Punct> puncts;
+    private Set<OrderServices> orderServices;
 
-    public City(){}
+    public Service(){}
+
 }
