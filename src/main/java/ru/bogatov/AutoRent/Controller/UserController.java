@@ -14,29 +14,6 @@ import java.util.Collections;
 
 @Controller
 public class UserController {
-    @Autowired
-    private UsersRepo usersRepo;
 
-    @GetMapping("/registration")
-    public String registration(Model model){
-
-        model.addAttribute("msg","");
-        return "registration";
-    }
-
-    @PostMapping("/registration")
-    public String addUser(User user, Model model){
-        User userBD = usersRepo.findByUsername(user.getUsername());
-
-        if(userBD != null){
-            model.addAttribute("msg","Такой пользователь уже существует");
-            return "registration";
-        }
-
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
-        usersRepo.save(user);
-        return "redirect:/login";
-    }
 
 }

@@ -9,6 +9,9 @@ body{
 .footer-copyright{
     background-color: #343a40;
 }
+.card-footer{
+    background:#262b2f !important;
+}
 .background {
     background-image: url("res/back.jpg");
     background-color: black;

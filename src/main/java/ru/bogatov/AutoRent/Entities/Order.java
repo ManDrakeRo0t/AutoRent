@@ -28,11 +28,6 @@ public class Order {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "punct_id_from")
     private Punct punct_from;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "punct_id_to")
-    private Punct punct_to;
-    @OneToMany( fetch = FetchType.EAGER)
-    private Set<OrderServices> orderServices;
 
     public Order(){}
 }

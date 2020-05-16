@@ -14,5 +14,4 @@ sendForm.onclick = function (event) {
     }
     if(counter === 6) form.submit();
     else alert("Заполните форму коректно");
-
 }

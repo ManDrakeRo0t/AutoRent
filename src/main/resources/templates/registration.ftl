@@ -1,8 +1,10 @@
-<#import "parts/common.ftlh" as c>
+<#import "parts/common.ftl" as c>
 
 <@c.html>
 
     <@c.header></@c.header>
+
+    <@c.head "Регистрация"/>
     <div class="section mt-5 p-md-5 align-items-center" style="padding-top: 200px">
         <div class="container mt-5 text-light ">
             <p> ${msg} </p>

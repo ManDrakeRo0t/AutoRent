@@ -1,14 +1,20 @@
 package ru.bogatov.AutoRent.Entities;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+//@Data
 @Table(name= "puncts" )
+@ToString
+@Getter
+@Setter
 public class Punct {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +26,6 @@ public class Punct {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Order> orders;
+//    @OneToMany(fetch = FetchType.EAGER)
+//    private Set<Order> orders;
 }

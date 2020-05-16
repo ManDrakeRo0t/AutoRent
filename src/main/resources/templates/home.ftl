@@ -1,15 +1,12 @@
-<#import "parts/common.ftlh" as c>
+<#import "parts/common.ftl" as c>
 
 
 <@c.html>
 
     <@c.header></@c.header>
-    <div class="section mt-5 pt-5">
-        <h4 class="text-light text-center">
-            <hr color="white">Почему именно мы?<hr color="white">
-        </h4>
 
-    </div>
+    <@c.head "Почему именно мы"></@c.head>
+
 <div class="section">
         <div class="container mt-5 mb-5">
             <div class="no-gutters row">

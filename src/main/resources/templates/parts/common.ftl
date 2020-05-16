@@ -1,4 +1,12 @@
-<#include "security.ftlh">
+<#include "security.ftl">
+
+<#macro head msg>
+    <div class="section mt-5 pt-5">
+        <h4 class="text-light text-center">
+            <hr color="white">${msg}<hr color="white">
+        </h4>
+    </div>
+</#macro>
 
 <#macro html>
 <!DOCTYPE HTML>
@@ -33,10 +41,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto" >
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Автомобили <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/cars">Автомобили <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Серивисы <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/carClasses">Классы автомобилей <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/">Пункты выдачи <span class="sr-only">(current)</span></a>

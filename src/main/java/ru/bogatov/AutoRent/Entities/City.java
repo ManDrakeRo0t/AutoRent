@@ -1,13 +1,19 @@
 package ru.bogatov.AutoRent.Entities;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+//@Data
 @Table(name = "cities")
+@ToString
+@Getter
+@Setter
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
