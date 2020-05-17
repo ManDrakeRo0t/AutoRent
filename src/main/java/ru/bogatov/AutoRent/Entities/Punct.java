@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 //@Data
 @Table(name= "puncts" )
-@ToString
+@ToString(exclude = "city")
 @Getter
 @Setter
 public class Punct {

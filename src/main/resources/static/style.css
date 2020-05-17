@@ -6,6 +6,10 @@ body{
     background-color: #262b2f;
 }
 
+.navbar{
+    background:#262b2f !important;
+}
+
 .footer-copyright{
     background-color: #343a40;
 }
@@ -54,4 +58,7 @@ body{
     display: flex;
     align-content: center;
     justify-content: center;
+}
+.add{
+    background: #383571;
 }

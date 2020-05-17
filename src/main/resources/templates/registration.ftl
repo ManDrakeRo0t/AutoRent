@@ -7,6 +7,7 @@
     <@c.head "Регистрация"/>
     <div class="section mt-5 p-md-5 align-items-center" style="padding-top: 200px">
         <div class="container mt-5 text-light ">
+            </div>
             <p> ${msg} </p>
                 <form action="/registration" method="post" id="RegForm">
                     <div class="row">

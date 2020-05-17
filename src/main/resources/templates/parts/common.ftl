@@ -22,18 +22,25 @@
 </head>
 <body>
 <div class="background"></div>
+<#--<div class="position-fixed bg-dark add text-light" style="top: 150px ; right: 0px">-->
+<#--    <div class="text-center">-->
+<#--        Для оформления заказа<br>нужно войти-->
+<#--    </div>-->
+<#--</div>-->
 <#nested>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="script.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?bbcda198-7bca-4c86-ac60-aa1f67b164f3&lang=ru_RU" type="text/javascript"></script>
+<#--<script src="search_control_ppo.js" type="text/javascript"></script>-->
+<script src="/static/script.js"></script>
 </body>
 </html>
 </#macro>
 
 <#macro header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="/"><img style="width: 110px" src="res/mainLogo.png"></a>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+        <a class="navbar-brand" href="/"><img style="width: 110px" src="/static/res/mainLogo.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -47,21 +54,21 @@
                     <a class="nav-link" href="/carClasses">Классы автомобилей <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Пункты выдачи <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/locations">Пункты выдачи <span class="sr-only">(current)</span></a>
                 </li>
-                <#if name!="гость">
+                <#if name!="Гость">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Оформить заказ <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/order">Оформить заказ <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/">Ваш AutoRent <span class="sr-only">(current)</span></a>
                 </li>
                 </#if>
             </ul>
-            <div class="navbar-text">Добро пожаловать ${name}
+            <div class="navbar-text">${name}<br> Добро пожаловать!
                 <div>
                     <form action="/logout" method="post">
-                        <#if name!="гость">
+                        <#if name!="Гость">
                             <input type="submit" value="Выйти" class="btn btn-primary btn-dark"/>
                         <#else>
                             <a class="btn btn-primary btn-dark" href="/login">Войти</a>
@@ -218,7 +225,7 @@
 
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">© 2020 Copyright:
-            <a href="https://mdbootstrap.com/"> AutoRent.ru</a>
+        <a href="#!"> AutoRent.ru</a>
         </div>
         <!-- Copyright -->
 

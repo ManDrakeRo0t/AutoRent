@@ -24,7 +24,7 @@
             <#list cars as car>
                 <div class="card bg-dark md-5 mt-5">
 
-                        <h4 class="text-center">${car.mark} : ${car.model}<br>${car.carClass.name}</h4>
+                    <h4 class="text-center">${car.mark} : ${car.model}<br><a href="/carClasses/#${car.carClass.name}" ><i class="fas fa-info-circle"></i> ${car.carClass.name}</a></h4>
 
 <#--                        <img class="card-img-top w-50" src="static/res/${car.mark}/${car.model}/1.jpg"/>-->
 
@@ -49,7 +49,7 @@
             </#list>
 
             <#else>
-                <span class="mt-5 md-5 text-light text-center">Машин не найдено</span>
+                <span class="mt-5 md-5 text-light text-center"><i class="fas fa-exclamation-circle"></i> Машин не найдено <i class="fas fa-exclamation-circle"></i></span>
             </#if>
         </div>
     </div>

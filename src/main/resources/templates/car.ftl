@@ -70,7 +70,7 @@
                 </div>
                 <div class="row mt-5 text-center">
                     <div class="text-center">
-                        <i class="fas fa-money-bill-wave-alt"></i> Цена за 1 час аренды : ${car.price} руб. / Цена сутки ${car.price * 24} руб.
+                        <i class="fas fa-money-bill-wave-alt"></i> Цена за 1 час аренды : ${car.price} руб. / Цена за сутки ${car.price * 24} руб.
                     </div>
                 </div>
                 <div class="mt-5">

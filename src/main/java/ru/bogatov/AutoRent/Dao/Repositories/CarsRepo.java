@@ -13,4 +13,6 @@ public interface CarsRepo extends JpaRepository<Car,Long> {
     public Iterable<Car> findByPriceLessThan(Integer price);
 
     public Car findByModel(String model);
+
+    public Car findById(Integer id);
 }

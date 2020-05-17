@@ -2,9 +2,12 @@ package ru.bogatov.AutoRent.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.bogatov.AutoRent.Dao.Repositories.CarsRepo;
 import ru.bogatov.AutoRent.Dao.Repositories.CitiesRepo;
 import ru.bogatov.AutoRent.Dao.Repositories.PunctsRepo;
+import ru.bogatov.AutoRent.Entities.Car;
 import ru.bogatov.AutoRent.Entities.City;
+import ru.bogatov.AutoRent.Entities.Punct;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,6 +19,8 @@ public class PunctsService {
     CitiesRepo citiesRepo;
     @Autowired
     PunctsRepo punctsRepo;
+    @Autowired
+    CarsRepo carsRepo;
 
     public List<String> getCitiesForCar(Integer id){
         Iterable<City> cities = citiesRepo.findAll();
@@ -31,4 +36,31 @@ public class PunctsService {
 
         return res;
     }
+
+    public Iterable<City> getAllCities(){
+        return citiesRepo.findAll();
+    }
+
+    public Iterable<Punct> getPunctsForCity(String name){
+        City city = citiesRepo.findCityByName(name).get(); //todo проверку
+
+        Iterable<Punct> puncts = punctsRepo.getPunctsByCity(city);
+
+        return puncts;
+     }
+
+    public Iterable<Car> getCarsForCity(String name){
+
+        List<Car> cars = new ArrayList<>();
+        City city = citiesRepo.findCityByName(name).get(); //todo ^
+
+        String[] avaiableCars = city.getAvailableCars().split("-");
+
+        for(String s : avaiableCars){
+            cars.add(carsRepo.findById(Integer.parseInt(s)));
+        }
+
+        return cars;
+    }
+
 }

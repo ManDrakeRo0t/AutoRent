@@ -19,6 +19,7 @@ public class CarService {
     CarClassesRepo carClassesRepo;
 
 
+
     public Iterable<Car> getAllCars(){
         return carsRepo.findAll();
     }
@@ -31,6 +32,7 @@ public class CarService {
         String model = str.substring(str.indexOf(" ")).trim();
         return carsRepo.findByModel(model);
     }
+
 
     public List<CarClass> getCarClasses(){
         return carClassesRepo.findAll();
