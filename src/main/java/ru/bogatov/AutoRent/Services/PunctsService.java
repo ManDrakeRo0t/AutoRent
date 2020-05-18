@@ -41,15 +41,14 @@ public class PunctsService {
         return citiesRepo.findAll();
     }
 
-    public Iterable<Punct> getPunctsForCity(String name){
+    public List<String> getPunctsForCity(String name){
         City city = citiesRepo.findCityByName(name).get(); //todo проверку
-
-        Iterable<Punct> puncts = punctsRepo.getPunctsByCity(city);
-
+        List<String> puncts = new ArrayList<>();
+        punctsRepo.getPunctsByCity(city).forEach(x -> puncts.add(x.getAddress()));
         return puncts;
      }
 
-    public Iterable<Car> getCarsForCity(String name){
+    public List<Car> getCarsForCity(String name){
 
         List<Car> cars = new ArrayList<>();
         City city = citiesRepo.findCityByName(name).get(); //todo ^

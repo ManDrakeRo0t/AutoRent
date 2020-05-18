@@ -7,4 +7,6 @@ import ru.bogatov.AutoRent.Entities.Punct;
 @Repository
 public interface PunctsRepo extends JpaRepository<Punct,Long> {
     public Iterable<Punct> getPunctsByCity(City city);
+
+    public Punct findByAddress(String address);
 }

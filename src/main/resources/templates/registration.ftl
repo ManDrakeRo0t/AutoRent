@@ -10,7 +10,7 @@
             </div>
             <p> ${msg} </p>
                 <form action="/registration" method="post" id="RegForm">
-                    <div class="row">
+                    <div class="row text-light">
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">

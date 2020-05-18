@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.bogatov.AutoRent.Entities.User;
 import ru.bogatov.AutoRent.Forms.OrderForm;
 import ru.bogatov.AutoRent.Services.CarService;
+import ru.bogatov.AutoRent.Services.OrderService;
 import ru.bogatov.AutoRent.Services.PunctsService;
 
 @Controller
@@ -16,6 +18,8 @@ public class MainController {
     PunctsService punctsService;
     @Autowired
     CarService carService;
+    @Autowired
+    OrderService orderService;
 
     @GetMapping("")
     public String home(){
@@ -34,13 +38,16 @@ public class MainController {
         if(!city.equals("def")){
             model.addAttribute("puncts",punctsService.getPunctsForCity(city));
             model.addAttribute("cars",punctsService.getCarsForCity(city));
+            model.addAttribute("crnCity",city);
         }
         return "order";
     }
 
     @PostMapping("/order")
-    public String confirmOrder(OrderForm orderForm){
-        return "";
+    public String confirmOrder(OrderForm orderForm,Model model){
+        orderService.SaveOrder(orderForm);
+        model.addAttribute("msg","Ваш заказ принят,проверяйте статут заказа в личном кабинете");
+        return "order";
     }
 
 }
