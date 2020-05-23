@@ -14,6 +14,7 @@ import ru.bogatov.AutoRent.Entities.User;
 import ru.bogatov.AutoRent.Forms.OrderForm;
 
 import javax.sql.DataSource;
+import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -28,6 +29,10 @@ public class OrderService {
     UsersRepo usersRepo;
     @Autowired
     CarsRepo carsRepo;
+
+    public Iterable<Order> getOrdersForUser(User user){
+        return ordersRepo.getAllByUser(user);
+    }
 
     public void SaveOrder(OrderForm orderForm){
         Order order = new Order();
@@ -54,11 +59,26 @@ public class OrderService {
         order.setDate_from(from);
         order.setDate_to(to);
         order.setPrice(price);
-        order.setOrder_status("Рассматривается");
+        order.setDetails("Рассматривается");
         order.setUser(user);
+        order.setStatus(false);
+        order.setPayment_status(false);
         order.setPunct_from(punct);
         order.setCar(car);
         ordersRepo.save(order);
 
+    }
+    @Transactional
+    public void deleteOrder(Integer id){
+        ordersRepo.deleteById(id);
+    }
+
+    @Transactional
+    public void payOrder(Integer id){
+        Order order = ordersRepo.getById(id);
+
+        if(order.status)order.setPayment_status(true);
+
+        ordersRepo.save(order);
     }
 }

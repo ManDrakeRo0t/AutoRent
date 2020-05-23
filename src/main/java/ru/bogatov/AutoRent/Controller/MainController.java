@@ -46,7 +46,7 @@ public class MainController {
     @PostMapping("/order")
     public String confirmOrder(OrderForm orderForm,Model model){
         orderService.SaveOrder(orderForm);
-        model.addAttribute("msg","Ваш заказ принят,проверяйте статут заказа в личном кабинете");
+        model.addAttribute("msg","Ваш заказ принят,проверяйте статут заказа в ");
         return "order";
     }
 

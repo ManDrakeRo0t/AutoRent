@@ -62,7 +62,7 @@
                     <a class="nav-link" href="/order">Оформить заказ <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Ваш AutoRent <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/personal">Ваш AutoRent <span class="sr-only">(current)</span></a>
                 </li>
                 </#if>
             </ul>
@@ -87,7 +87,7 @@
 
 <#macro footer>
     <!-- Footer -->
-    <footer class="page-footer font-small unique-color-dark">
+    <footer class="page-footer font-small unique-color-dark mt-5">
 
         <div style="background-color: #6351ce;">
             <div class="container">

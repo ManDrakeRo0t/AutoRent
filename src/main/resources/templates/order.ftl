@@ -10,7 +10,7 @@
     <div class="section mt-5 p-md-5 align-items-center">
         <div class="container mt-5 text-light bg-dark">
             <#if msg??>
-                <div class="text-light">${msg}</div>
+                <div class="text-light">${msg} <a href="/personal">личном кабинете</a></div>
                 <#else >
 
                 <div class="text-center">Выберите город<hr color="white"></div>

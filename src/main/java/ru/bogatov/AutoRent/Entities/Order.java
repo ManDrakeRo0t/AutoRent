@@ -25,7 +25,9 @@ public class Order {
     @Column(name = "date_to" , columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar date_to;
-    private String order_status;
+    private String details;
+    public boolean status;
+    private boolean payment_status;
 //    private Integer car_id;
 //    private Integer user_id;
 //    private Integer punct_id;
