@@ -11,16 +11,18 @@ import ru.bogatov.AutoRent.Entities.Car;
 import ru.bogatov.AutoRent.Entities.CarClass;
 import ru.bogatov.AutoRent.Forms.CarFilter;
 import ru.bogatov.AutoRent.Services.CarService;
+import ru.bogatov.AutoRent.Services.CarServiceable;
 import ru.bogatov.AutoRent.Services.PunctsService;
+import ru.bogatov.AutoRent.Services.PunctsServiceable;
 
 import java.util.List;
 
 @Controller
 public class CarsController {
     @Autowired
-    CarService carService;
+    CarServiceable carService;
     @Autowired
-    PunctsService punctsService;
+    PunctsServiceable punctsService;
 
     @GetMapping("/cars")
     public String carsPark(@RequestParam(name = "car",required = false,defaultValue = "def")String car, Model model){

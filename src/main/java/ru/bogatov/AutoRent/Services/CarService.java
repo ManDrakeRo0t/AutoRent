@@ -9,8 +9,8 @@ import ru.bogatov.AutoRent.Entities.CarClass;
 
 import java.util.List;
 
-@Service
-public class CarService {
+
+public class CarService implements CarServiceable{
     @Autowired
     CarsRepo carsRepo;
     @Autowired

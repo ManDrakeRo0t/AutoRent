@@ -25,20 +25,20 @@
                 <div class="col-3">
                     <div class="row-cols-1 no-gutters">
                         <div class="cols-3">
-                           <img src="res/tagline--6.jpg" class="img-fluid" alt="">
+                           <img src="/static/res/tagline--6.jpg" class="img-fluid" alt="">
                         </div>
                         <div class="cols-3">
-                            <img src="res/tagline-5.jpg" class="img-fluid" alt="">
+                            <img src="/static/res/tagline-5.jpg" class="img-fluid" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="row-cols-1 no-gutters">
                         <div class="cols-3">
-                           <img src="res/tagline-1.jpg" class="img-fluid" alt="">
+                           <img src="/static/res/tagline-1.jpg" class="img-fluid" alt="">
                         </div>
                         <div class="cols-3">
-                            <img src="res/tagline-2.jpg" class="img-fluid" alt="">
+                            <img src="/static/res/tagline-2.jpg" class="img-fluid" alt="">
 
                         </div>
                     </div>

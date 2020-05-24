@@ -8,18 +8,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.bogatov.AutoRent.Entities.User;
 import ru.bogatov.AutoRent.Forms.OrderForm;
-import ru.bogatov.AutoRent.Services.CarService;
-import ru.bogatov.AutoRent.Services.OrderService;
-import ru.bogatov.AutoRent.Services.PunctsService;
+import ru.bogatov.AutoRent.Services.*;
 
 @Controller
 public class MainController {
     @Autowired
-    PunctsService punctsService;
+    PunctsServiceable punctsService;
     @Autowired
-    CarService carService;
+    CarServiceable carService;
     @Autowired
-    OrderService orderService;
+    OrderServiceable orderService;
 
     @GetMapping("")
     public String home(){

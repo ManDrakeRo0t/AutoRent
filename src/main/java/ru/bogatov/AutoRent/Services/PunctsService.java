@@ -1,7 +1,6 @@
 package ru.bogatov.AutoRent.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import ru.bogatov.AutoRent.Dao.CarsRepo;
 import ru.bogatov.AutoRent.Dao.CitiesRepo;
 import ru.bogatov.AutoRent.Dao.PunctsRepo;
@@ -12,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Service
-public class PunctsService {
+
+public class PunctsService implements PunctsServiceable {
     @Autowired
     CitiesRepo citiesRepo;
     @Autowired

@@ -1,7 +1,6 @@
 package ru.bogatov.AutoRent.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import ru.bogatov.AutoRent.Dao.CarsRepo;
 import ru.bogatov.AutoRent.Dao.OrdersRepo;
 import ru.bogatov.AutoRent.Dao.PunctsRepo;
@@ -17,8 +16,8 @@ import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-@Service
-public class OrderService {
+
+public class OrderService implements OrderServiceable {
     private final String def = "Рассматривается";
     @Autowired
     OrdersRepo ordersRepo;

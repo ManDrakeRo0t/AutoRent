@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.bogatov.AutoRent.Entities.Order;
 import ru.bogatov.AutoRent.Forms.CarFilter;
 import ru.bogatov.AutoRent.Forms.EditOrderForm;
-import ru.bogatov.AutoRent.Services.OrderService;
-import ru.bogatov.AutoRent.Services.UserService;
+import ru.bogatov.AutoRent.Services.OrderServiceable;
+import ru.bogatov.AutoRent.Services.UserServiceable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +22,9 @@ import java.util.List;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
     @Autowired
-    OrderService orderService;
+    OrderServiceable orderService;
     @Autowired
-    UserService userService;
+    UserServiceable userService;
 
     @GetMapping
     public String viewOrders(@RequestParam(name = "view",required = false) String view,Model model){

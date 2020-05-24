@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.bogatov.AutoRent.Services.OrderService;
-import ru.bogatov.AutoRent.Services.UserService;
+import ru.bogatov.AutoRent.Services.OrderServiceable;
+import ru.bogatov.AutoRent.Services.UserServiceable;
 
 @Controller
 @RequestMapping("/personal")
 @PreAuthorize("hasAuthority('USER')")
 public class UserController {
     @Autowired
-    OrderService orderService;
+    OrderServiceable orderService;
     @Autowired
-    UserService userService;
+    UserServiceable userService;
 
     @GetMapping
     public String orderList(@AuthenticationPrincipal User user, Model model){
