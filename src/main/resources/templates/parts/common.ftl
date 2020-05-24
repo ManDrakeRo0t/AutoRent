@@ -171,7 +171,7 @@
                     </p>
                     <#if isAdmin>
                     <p>
-                        <a href="#!">Управление</a>
+                        <a href="/administration">Управление</a>
                     </p>
                     </#if>
 

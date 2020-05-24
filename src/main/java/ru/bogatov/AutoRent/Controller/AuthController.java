@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.bogatov.AutoRent.Dao.Repositories.UsersRepo;
+import ru.bogatov.AutoRent.Dao.UsersRepo;
 import ru.bogatov.AutoRent.Entities.Role;
 import ru.bogatov.AutoRent.Entities.User;
 

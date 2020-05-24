@@ -28,6 +28,7 @@ public class Order {
     private String details;
     public boolean status;
     private boolean payment_status;
+    private boolean review;
 //    private Integer car_id;
 //    private Integer user_id;
 //    private Integer punct_id;
@@ -40,6 +41,15 @@ public class Order {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "punct_id")
     private Punct punct_from;
+
+    public String getDate(){
+        String s = "";
+        s += String.format("%tF" ,date_from.getTime());
+        s += "  " + String.format("%tR" ,date_from.getTime());
+        s += " - " + String.format("%tF" ,date_to.getTime());
+        s += "  " + String.format("%tR" ,date_to.getTime());
+        return s;
+    }
 
     public Order(){}
 }

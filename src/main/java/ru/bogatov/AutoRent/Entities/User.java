@@ -24,8 +24,14 @@ public class User  implements UserDetails {
     private String driving_license_number;
     private String driving_license_date;
 
+
 //    @OneToMany(fetch = FetchType.EAGER)
 //    private Set<Order> orders;
+
+    public String parseDate(){
+        String[] parts = driving_license_date.split("-");
+        return parts[2]+"."+parts[1]+"."+parts[0];
+    }
 
     @ElementCollection(targetClass = Role.class,fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role" , joinColumns = @JoinColumn(name = "user_id"))

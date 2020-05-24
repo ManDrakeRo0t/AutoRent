@@ -10,7 +10,7 @@
             <div class="container text-light mt-5 md-5 bg-dark">
                 <#list cities as city >
                 <div>
-                    <ul>оформить в ${city.name}</ul>
+                    <ul><a href="/order?city=${city.name}">оформить</a> в ${city.name}</ul>
                     <#list city.puncts as punct>
 
                         <li class="ml-5"><a href="##" onclick="searchControl.search('${city.name} ${punct.address}')">${punct.address} <i class="fas fa-search-location"></i></a></li>

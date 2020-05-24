@@ -2,14 +2,12 @@ package ru.bogatov.AutoRent.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.bogatov.AutoRent.Dao.Repositories.CarClassesRepo;
-import ru.bogatov.AutoRent.Dao.Repositories.CarsRepo;
+import ru.bogatov.AutoRent.Dao.CarClassesRepo;
+import ru.bogatov.AutoRent.Dao.CarsRepo;
 import ru.bogatov.AutoRent.Entities.Car;
 import ru.bogatov.AutoRent.Entities.CarClass;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarService {

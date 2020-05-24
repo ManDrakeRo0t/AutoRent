@@ -1,4 +1,4 @@
-package ru.bogatov.AutoRent.Dao.Repositories;
+package ru.bogatov.AutoRent.Dao;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

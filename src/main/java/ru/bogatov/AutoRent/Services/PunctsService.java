@@ -2,12 +2,11 @@ package ru.bogatov.AutoRent.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.bogatov.AutoRent.Dao.Repositories.CarsRepo;
-import ru.bogatov.AutoRent.Dao.Repositories.CitiesRepo;
-import ru.bogatov.AutoRent.Dao.Repositories.PunctsRepo;
+import ru.bogatov.AutoRent.Dao.CarsRepo;
+import ru.bogatov.AutoRent.Dao.CitiesRepo;
+import ru.bogatov.AutoRent.Dao.PunctsRepo;
 import ru.bogatov.AutoRent.Entities.Car;
 import ru.bogatov.AutoRent.Entities.City;
-import ru.bogatov.AutoRent.Entities.Punct;
 
 import java.util.ArrayList;
 import java.util.Iterator;
