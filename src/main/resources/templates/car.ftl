@@ -11,24 +11,42 @@
         <div class="container mt-5 md-5 text-light">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    <#if car.pictures?number != 0>
+                        <#list 1..car.pictures?number as x >
+                            <#if x == 1>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <#else >
+                                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                            </#if>
+                        </#list>
+                    </#if>
                 </ol>
                 <div class="carousel-inner mt-5 md-5">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100 img-fluid" src="/static/res/${car.mark}/${car.model}/1.jpg" alt="Первый слайд">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 img-fluid" src="/static/res/${car.mark}/${car.model}/2.jpg" alt="Второй слайд">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 img-fluid" src="/static/res/${car.mark}/${car.model}/3.jpg" alt="Третий слайд">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 img-fluid"  src="/static/res/${car.mark}/${car.model}/4.jpg" alt="Четвертый слайд">
-                    </div>
+                    <#if car.pictures?number != 0>
+                        <#list 1..car.pictures?number as x >
+                            <#if x == 1>
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100 img-fluid" src="/static/res/${car.mark}/${car.model}/${x?abs}.jpg" alt="Первый слайд">
+                                </div>
+                            <#else >
+                                <div class="carousel-item">
+                                    <img class="d-block w-100 img-fluid" src="/static/res/${car.mark}/${car.model}/${x?abs}.jpg" alt="Первый слайд">
+                                </div>
+                            </#if>
+                        </#list>
+                    </#if>
+<#--                    <div class="carousel-item ">-->
+<#--                        <img class="d-block w-100 img-fluid" src="/static/res/${car.mark}/${car.model}/1.jpg" alt="Первый слайд">-->
+<#--                    </div>-->
+<#--                    <div class="carousel-item">-->
+<#--                        <img class="d-block w-100 img-fluid" src="/static/res/${car.mark}/${car.model}/2.jpg" alt="Второй слайд">-->
+<#--                    </div>-->
+<#--                    <div class="carousel-item">-->
+<#--                        <img class="d-block w-100 img-fluid" src="/static/res/${car.mark}/${car.model}/3.jpg" alt="Третий слайд">-->
+<#--                    </div>-->
+<#--                    <div class="carousel-item">-->
+<#--                        <img class="d-block w-100 img-fluid"  src="/static/res/${car.mark}/${car.model}/4.jpg" alt="Четвертый слайд">-->
+<#--                    </div>-->
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

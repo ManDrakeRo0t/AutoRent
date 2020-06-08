@@ -5,16 +5,12 @@ import ru.bogatov.AutoRent.Dao.CarsRepo;
 import ru.bogatov.AutoRent.Dao.OrdersRepo;
 import ru.bogatov.AutoRent.Dao.PunctsRepo;
 import ru.bogatov.AutoRent.Dao.UsersRepo;
-import ru.bogatov.AutoRent.Entities.Car;
-import ru.bogatov.AutoRent.Entities.Order;
-import ru.bogatov.AutoRent.Entities.Punct;
-import ru.bogatov.AutoRent.Entities.User;
+import ru.bogatov.AutoRent.Entities.*;
 import ru.bogatov.AutoRent.Forms.EditOrderForm;
 import ru.bogatov.AutoRent.Forms.OrderForm;
 
 import javax.transaction.Transactional;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 
 public class OrderService implements OrderServiceable {
@@ -27,6 +23,48 @@ public class OrderService implements OrderServiceable {
     UsersRepo usersRepo;
     @Autowired
     CarsRepo carsRepo;
+
+    public Map<String, String> getOrdersMap(){
+
+        Map<String, String> map = new HashMap<>();
+        List<Order> orders = ordersRepo.findAll();
+        for(Order o : orders){
+            City city = o.getPunct_from().getCity();
+            List<Order> orderList = ordersRepo.getAllByCar(o.getCar());
+            for(Iterator<Order> iterator = orderList.iterator();iterator.hasNext();){
+                Order or = iterator.next();
+                if(or.isReview()){
+                    iterator.remove();
+                    continue;
+                }
+                if(!or.getPunct_from().getCity().getName().equals(city.getName())){
+                    iterator.remove();
+                    continue;
+                }
+                if(or.getId().equals(o.getId())){
+                    iterator.remove();
+                }
+            }
+//            for(Order or : orderList){
+//                if(!or.getPunct_from().getCity().getName().equals(city.getName())){
+//                    orderList.remove(or);
+//                    continue;
+//                }
+//                if(or.getId().equals(o.getId())){
+//                    orderList.remove(or);
+//                }
+//            }
+            //orderList.removeIf(or -> !or.getPunct_from().getCity().equals(city));
+            List<String> stringList = new ArrayList<>();
+            orderList.forEach(x -> stringList.add("Номер "+ x.getId() + " | " + x.getDate() + "   :   Стоимость " + x.getPrice().toString() +" р. "));
+            StringBuilder res = new StringBuilder();
+            for(String s : stringList){
+                res.append(s);
+            }
+            map.put(o.getId().toString()+"o",res.toString());
+        }
+        return map;
+    }
 
     public void editOrder(EditOrderForm form){
         Order order = this.getOrderById(form.id);

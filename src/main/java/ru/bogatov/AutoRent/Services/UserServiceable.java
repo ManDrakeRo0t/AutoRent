@@ -6,4 +6,5 @@ public interface UserServiceable {
     public User getUserByMail(String mail);
     void save(User user);
     User findByUsername(String username);
+    public Boolean registerUser(User user);
 }

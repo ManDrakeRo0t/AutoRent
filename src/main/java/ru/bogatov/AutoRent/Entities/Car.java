@@ -2,6 +2,8 @@ package ru.bogatov.AutoRent.Entities;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.bogatov.AutoRent.Services.PunctsServiceable;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -26,8 +28,13 @@ public class Car {
     @JoinColumn(name = "class_id")
     private CarClass carClass;
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    private Set<Order> orders;
+    public String getNormalPrice(){
+        return price.toString();
+    }
+
+    public Iterable<City> getCities(){
+        return null;
+    }
 
     public Car() {
     }

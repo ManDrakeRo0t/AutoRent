@@ -7,9 +7,7 @@ import ru.bogatov.AutoRent.Dao.PunctsRepo;
 import ru.bogatov.AutoRent.Entities.Car;
 import ru.bogatov.AutoRent.Entities.City;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 public class PunctsService implements PunctsServiceable {
@@ -19,6 +17,15 @@ public class PunctsService implements PunctsServiceable {
     PunctsRepo punctsRepo;
     @Autowired
     CarsRepo carsRepo;
+
+    public Map<String, List<String>> getCitiesForCarsMap() {
+        Map<String,List<String>> cities = new HashMap<>();
+        carsRepo.findAll().forEach( x -> cities.put(x.getMark() + ":" + x.getModel(),
+                this.getCitiesForCar(x.getId())
+                ));
+        return cities;
+    }
+
 
     public List<String> getCitiesForCar(Integer id){
         Iterable<City> cities = citiesRepo.findAll();
@@ -54,7 +61,7 @@ public class PunctsService implements PunctsServiceable {
         String[] avaiableCars = city.getAvailableCars().split("-");
 
         for(String s : avaiableCars){
-            cars.add(carsRepo.findById(Integer.parseInt(s)));
+            if(!s.equals("")) cars.add(carsRepo.findById(Integer.parseInt(s)));
         }
 
         return cars;

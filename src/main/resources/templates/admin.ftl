@@ -4,25 +4,36 @@
 
     <@c.header ></@c.header>
 
-    <@c.head "Управение заказами"></@c.head>
+    <@c.head "Админ панель"></@c.head>
 
     <div class="section">
         <div class="container text-light mt-5 md-5 ">
-
-            <a href="/administration" class="btn btn-primary btn-dark mt-3">Показать все</a>
-            <a href="/administration?view=notReviewed" class="btn btn-primary btn-dark mt-3">Показать не рассмотренные</a>
-            <form method="post" action="/administration" >
-                <div class="form-group">
-                    <label for="id">
-                        Найти по номеру заказа :
-                    </label>
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                    <input name="maxPrice" type="number" class="form-control bg-dark w-25 text-light" id="id"/>
+            <div class="row">
+                <div class="col-1"></div>
+                <div id="a1" onclick="changeButtons(this)" class="text-center col-4 btn-dark btn-primary " style="border-radius:5px">
+                    Управление заказами
                 </div>
-                <div><input type="submit" value="Выбрать" class="btn btn-primary btn-dark"/></div>
-            </form>
-            <#if msg??>
-                <p style="color: #17a2b8; display: inline"> Ничего не найдено </p>
+                <div class="col-2"></div>
+                <div id="a2" onclick="changeButtons(this)" class=" text-center col-4 btn btn-primary " style="border-radius:5px">
+                    Управление автопарком
+                </div>
+            </div>
+            <hr color="white">
+            <div id="orderspanel">
+                <a href="/administration" class="btn btn-primary btn-dark mt-3">Показать все</a>
+                <a href="/administration?view=notReviewed" class="btn btn-primary btn-dark mt-3">Показать не рассмотренные</a>
+                <form method="post" action="/administration" >
+                    <div class="form-group">
+                        <label for="id">
+                            Найти по номеру заказа :
+                        </label>
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <input name="maxPrice" type="number" class="form-control bg-dark w-25 text-light" id="id"/>
+                    </div>
+                    <div><input type="submit" value="Выбрать" class="btn btn-primary btn-dark"/></div>
+                </form>
+                <#if msg??>
+                    <p style="color: #17a2b8; display: inline"> Ничего не найдено </p>
                 <#else >
                     <#if orders?has_content>
                         <#list orders as order >
@@ -72,13 +83,20 @@
                                             <p style="color: #17a2b8; display: inline"> Фамилия : </p>${order.user.surname}<br>
                                             <p style="color: #17a2b8; display: inline"> Почта : </p>${order.user.username}<br>
                                             <p style="color: #17a2b8; display: inline"> Срок : </p>${order.getDate()}<br>
-                                            <p style="color: #17a2b8; display: inline"> Класс автомобиля : </p>${order.car.carClass.name}<br>
+                                            <p style="color: #17a2b8; display: inline"> Другие заказы на этот автомобиль : </p><br>
+                                            <#if mapOrders?has_content>
+                                                <#if mapOrders[order.id?abs+"o"]?has_content>
+                                                   <p>${mapOrders[order.id?abs+"o"]}</p>
+                                                </#if>
+                                            </#if>
+
+                                            <br><p style="color: #17a2b8; display: inline"> Класс автомобиля : </p>${order.car.carClass.name}<br>
                                             <p style="color: #17a2b8; display: inline"> Необходимый возраст : </p>${order.car.carClass.required_age}<br>
                                             <p style="color: #17a2b8; display: inline"> Необходимый стаж : </p>${order.car.carClass.required_age - 19}<br>
                                             <a target="_blank" href="https://xn--90adear.xn--p1ai/check/driver#${order.user.driving_license_number}+${order.user.parseDate()}">Проверить на Госавтоинспекции</a>
                                         </div>
                                         <div class="col-6">
-                                            <form method="post" action="/administration/edit">
+                                            <form method="post" action="/administration/editOrder">
                                                 <div class="form-group">
                                                     <label for="details" class="text-center">
                                                         Детали заказа :
@@ -86,12 +104,12 @@
                                                     <input type="text" name="details" class="form-control bg-dark text-light" id="details" value="${order.details}"/>
                                                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                                                 </div>
-                                                    <label for="status" class="text-center">
-                                                        Принять заказ :
-                                                    </label>
-                                                    <input type="checkbox" name="status" class="form-control bg-dark text-light" id="status"/>
-                                                    <input type="hidden" name="id" value="${order.id}">
-                                                    <input type="submit" value="Отправить" class="btn btn-primary mr-5" style="float: right"/>
+                                                <label for="status" class="text-center">
+                                                    Принять заказ :
+                                                </label>
+                                                <input type="checkbox" name="status" class="form-control bg-dark text-light" id="status"/>
+                                                <input type="hidden" name="id" value="${order.id}">
+                                                <input type="submit" value="Отправить" class="btn btn-primary mr-5" style="float: right"/>
                                             </form>
                                         </div>
                                     </div>
@@ -102,13 +120,114 @@
                     <#else >
                         <p style="color: #17a2b8; display: inline"> Ничего не найдено </p>
                     </#if>
-            </#if>
+                </#if>
+            </div>
+            <div id="carspanel">
+                    <div>Добавлние автомобиля</div>
+                    <form action="/administration/addCar" style="margin-bottom: 40px;" method="post" enctype="multipart/form-data">
+                        <div class="row bg-dark">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="mark">
+                                        Марка :
+                                    </label>
+                                    <input type="text" name="mark" class="form-control bg-dark w-75 text-light" id="mark"/>
+                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="model">
+                                        Модель :
+                                    </label>
+                                    <input type="text" name="model" class="form-control bg-dark w-75 text-light" id="model"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">
+                                        Цена :
+                                    </label>
+                                    <input type="number" name="price" class="form-control bg-dark w-75 text-light" id="price"/>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="places">
+                                        Места :
+                                    </label>
+                                    <input type="number" name="places" class="form-control bg-dark w-75 text-light" id="places"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gearbox">
+                                        Коробка :
+                                    </label>
+                                    <input type="text" name="gearbox" class="form-control bg-dark w-75 text-light" id="gearbox"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fuel">
+                                        Топливо :
+                                    </label>
+                                    <input type="text" name="fuel" class="form-control bg-dark w-75 text-light" id="fuel"/>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="carClass">
+                                        Класс :
+                                    </label>
+                                    <select id="carClass"  name="carClass" class="bg-dark text-light">
+                                        <#if classes?has_content>
+                                            <#list classes as class>
+                                                <option>${class.name}</option>
+                                            </#list>
+                                        </#if>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">
+                                        Описание :
+                                    </label>
+                                    <input type="text" name="description" class="form-control bg-dark w-75 text-light" id="description"/>
+                                </div>
+                                <div>
+                                    <p>Загрузите фото автомобиля</p>
+                                    <p><input type="file" name="file" multiple accept="image/*,image/jpeg">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <button type="submit"  class="btn btn-primary mt-3">Добавить</button><br>
+                            </div>
+                        </div>
+                    </form>
+                <#if cars?has_content>
+                    <#list cars as car >
+                    <div class="row bg-dark" style="margin-bottom: 15px ; border-radius: 15px">
+                        <div class="col-3">
+                            ${car.mark + " " + car.model}<br>
+                            <img class="img-fluid" src="/static/res/${car.mark}/${car.model}/1.jpg">
+                        </div>
+                        <div class="col-6">
+                            <form action="/administration/editCar" method="post">
+                                <input type="hidden" name="id" value="${car.id}">
+                                <label><input type="number" name="price" value="${car.getNormalPrice()}">Цена за час</label>
+                                <button type="submit" class="btn btn-primary btn mt-3">Сохранить</button><br>
+                                <#list cities as city>
 
+                                    <label><input type="checkbox" name="${"c"+city.id}" ${mapCars[car.mark + ":" + car.model]?seq_contains(city.name)?string("checked","")}>${city.name}</label><br>
 
+                                </#list>
+                                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            </form>
+                        </div>
+                        <div>
+                            <form action="/administration/deleteCar/${car.id}" method="post">
+                                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                <button type="submit"  class="btn btn-primary mt-3">Удалить</button><br>
+                            </form>
+                        </div>
+                    </div>
+                </#list>
+                </#if>
+                </div>
+            </div>
 
-
-
-        </div>
     </div>
 
 

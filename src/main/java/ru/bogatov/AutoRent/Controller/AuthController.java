@@ -18,8 +18,6 @@ public class AuthController {
     @Autowired
     private UserServiceable userService;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     @GetMapping("/registration")
     public String registration(Model model){
@@ -30,17 +28,9 @@ public class AuthController {
 
     @PostMapping("/registration")
     public String addUser(User user, Model model){
-        User userBD = userService.findByUsername(user.getUsername());
+        if(userService.registerUser(user)) return "redirect:/login";
+        model.addAttribute("msg","Такой пользователь уже существует");
+        return "registration";
 
-        if(userBD != null){
-            model.addAttribute("msg","Такой пользователь уже существует");
-            return "registration";
-        }
-
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.save(user);
-        return "redirect:/login";
     }
 }

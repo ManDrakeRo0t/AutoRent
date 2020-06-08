@@ -8,10 +8,11 @@
         </h4>
     </div>
 
-     <div class="text-center" style="padding-top: 40%">
-         <a  href="/">Вернуть на главную</a>
-     </div>
+    <div class="text-center" style="padding-top: 40%">
+        <a  href="/">Вернуть на главную</a>
+    </div>
 
 
 
 </@c.html>
+
