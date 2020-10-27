@@ -18,4 +18,5 @@ public interface OrderServiceable {
     public void deleteOrder(Integer id);
     public void payOrder(Integer id);
     public Map<String,String> getOrdersMap();
+    public void deletePastDueOrders();
 }

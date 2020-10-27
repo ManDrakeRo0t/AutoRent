@@ -20,18 +20,31 @@
             </div>
             <hr color="white">
             <div id="orderspanel">
-                <a href="/administration" class="btn btn-primary btn-dark mt-3">Показать все</a>
-                <a href="/administration?view=notReviewed" class="btn btn-primary btn-dark mt-3">Показать не рассмотренные</a>
-                <form method="post" action="/administration" >
-                    <div class="form-group">
-                        <label for="id">
-                            Найти по номеру заказа :
-                        </label>
+                <div class="row">
+                <div class="col-2">
+                    <a href="/administration" class="btn btn-primary btn-dark mt-3">Показать все</a>
+                </div>
+                <div class="col-3">
+                    <a href="/administration?view=notReviewed" class="btn btn-primary btn-dark mt-3" >Показать не рассмотренные</a>
+                </div>
+                <div class="col-4"><form method="post" action="/administration/deleteOrders">
                         <input type="hidden" name="_csrf" value="${_csrf.token}">
-                        <input name="maxPrice" type="number" class="form-control bg-dark w-25 text-light" id="id"/>
-                    </div>
-                    <div><input type="submit" value="Выбрать" class="btn btn-primary btn-dark"/></div>
-                </form>
+                        <button type="submit" class="btn-dark btn-primary btn" >Удалить просроченные заказы</button>
+                    </form></div>
+                <div class="col-3">
+                    <form method="post" action="/administration" >
+                        <div class="form-group">
+                            <label for="id">
+                                Найти по номеру заказа :
+                            </label>
+                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input name="maxPrice" type="number" class="form-control bg-dark w-25 text-light" id="id"/>
+                        </div>
+                        <div><input type="submit" value="Выбрать" class="btn btn-primary btn-dark"/></div>
+                    </form>
+                </div>
+                </div>
+
                 <#if msg??>
                     <p style="color: #17a2b8; display: inline"> Ничего не найдено </p>
                 <#else >
@@ -73,6 +86,10 @@
                                             </button>
                                         </p>
                                     </#if>
+                                    <form action="/administration/delete/${order.id}" method="post">
+                                        <input type="submit" value="Удалить заказ" class="btn btn-primary mr-5" style="float: right"/>
+                                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                    </form>
                                 </div>
                             </div>
                             <div class="collapse" id="collapseExample${order.id}">
@@ -86,8 +103,8 @@
                                             <p style="color: #17a2b8; display: inline"> Другие заказы на этот автомобиль : </p><br>
                                             <#if mapOrders?has_content>
                                                 <#if mapOrders[order.id?abs+"o"]?has_content>
-                                                   <p>${mapOrders[order.id?abs+"o"]}</p>
-                                                </#if>
+                                                  <p>${mapOrders[order.id?abs+"o"]}</p>
+                                                 </#if>
                                             </#if>
 
                                             <br><p style="color: #17a2b8; display: inline"> Класс автомобиля : </p>${order.car.carClass.name}<br>

@@ -8,9 +8,11 @@ import ru.bogatov.AutoRent.Dao.UsersRepo;
 import ru.bogatov.AutoRent.Entities.*;
 import ru.bogatov.AutoRent.Forms.EditOrderForm;
 import ru.bogatov.AutoRent.Forms.OrderForm;
+import sun.util.resources.CalendarData;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class OrderService implements OrderServiceable {
@@ -24,6 +26,22 @@ public class OrderService implements OrderServiceable {
     @Autowired
     CarsRepo carsRepo;
 
+
+    @Override
+    @Transactional
+    public void deletePastDueOrders() {
+
+        List<Order> orderList = ordersRepo.findAll();
+        Date date = new Date();
+        List<Order> filteredOreders = new ArrayList<>();
+
+        orderList.forEach(x -> {
+            if(x.getDate_to().getTimeInMillis() <  date.getTime()) filteredOreders.add(x);
+        });
+
+        ordersRepo.deleteAll(filteredOreders);
+    }
+
     public Map<String, String> getOrdersMap(){
 
         Map<String, String> map = new HashMap<>();
@@ -33,30 +51,31 @@ public class OrderService implements OrderServiceable {
             List<Order> orderList = ordersRepo.getAllByCar(o.getCar());
             for(Iterator<Order> iterator = orderList.iterator();iterator.hasNext();){
                 Order or = iterator.next();
-                if(or.isReview()){
+                if(!or.getPunct_from().getCity().getName().equals(city.getName())){ // не этот город
                     iterator.remove();
                     continue;
                 }
-                if(!or.getPunct_from().getCity().getName().equals(city.getName())){
+                if(or.getId().equals(o.getId())){  // этот же
                     iterator.remove();
                     continue;
                 }
-                if(or.getId().equals(o.getId())){
+                if(or.isPayment_status() || or.isStatus()){
+                    continue;
+                }
+                if(or.isReview()){ //рассмотренные
                     iterator.remove();
                 }
             }
-//            for(Order or : orderList){
-//                if(!or.getPunct_from().getCity().getName().equals(city.getName())){
-//                    orderList.remove(or);
-//                    continue;
-//                }
-//                if(or.getId().equals(o.getId())){
-//                    orderList.remove(or);
-//                }
-//            }
-            //orderList.removeIf(or -> !or.getPunct_from().getCity().equals(city));
             List<String> stringList = new ArrayList<>();
-            orderList.forEach(x -> stringList.add("Номер "+ x.getId() + " | " + x.getDate() + "   :   Стоимость " + x.getPrice().toString() +" р. "));
+            orderList.forEach(x -> {
+                if(x.isPayment_status()) {
+                    stringList.add("Оплачен| Номер " + x.getId() + " | " + x.getDate() + "   :    " + x.getPrice().toString() + " р. ");
+                }else if(x.isStatus()){
+                    stringList.add("Принят | Номер " + x.getId() + " | " + x.getDate() + "   :    " + x.getPrice().toString() + " р. ");
+                }else {
+                    stringList.add("Не принят| Номер "+ x.getId() + " | " + x.getDate() + "   :    " + x.getPrice().toString() +" р. ");
+                }
+            });
             StringBuilder res = new StringBuilder();
             for(String s : stringList){
                 res.append(s);
@@ -114,6 +133,9 @@ public class OrderService implements OrderServiceable {
         long min = sec / 60;
         long hours = min / 60;
         price =  ((int)hours * car.getPrice());
+
+        from.set(Calendar.MONTH,from.get(Calendar.MONTH)-1);
+        to.set(Calendar.MONTH,to.get(Calendar.MONTH)-1);
 
         order.setDate_from(from);
         order.setDate_to(to);

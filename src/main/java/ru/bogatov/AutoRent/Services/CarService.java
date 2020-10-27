@@ -24,7 +24,8 @@ public class CarService implements CarServiceable{
 
     @Value("${upload.path}")
     private String path;
-
+    @Autowired
+    PunctsServiceable punctsService;
     @Autowired
     CarsRepo carsRepo;
     @Autowired
@@ -53,7 +54,7 @@ public class CarService implements CarServiceable{
             modelDir.mkdir();
         }
         for(int i = 0;i < file.length;i++){
-            file[i].transferTo(new File(modelDir+"/"+ ++i +".jpg"));
+            file[i].transferTo(new File(modelDir+"/"+ (i+1) +".jpg"));
         }
 
         carsRepo.save(car);
@@ -96,6 +97,7 @@ public class CarService implements CarServiceable{
     @Transactional
     public void deleteCar(String id){
         carsRepo.deleteById(Integer.parseInt(id));
+        punctsService.deleteCar(id);
     }
 
 

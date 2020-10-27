@@ -18,6 +18,11 @@ public class PunctsService implements PunctsServiceable {
     @Autowired
     CarsRepo carsRepo;
 
+    public void deleteCar(String id){
+        Iterable<City> cities = citiesRepo.findAll();
+        cities.forEach(x -> x.setAvailableCars(x.getAvailableCars().replace("-"+id+"-","-")));
+    }
+
     public Map<String, List<String>> getCitiesForCarsMap() {
         Map<String,List<String>> cities = new HashMap<>();
         carsRepo.findAll().forEach( x -> cities.put(x.getMark() + ":" + x.getModel(),

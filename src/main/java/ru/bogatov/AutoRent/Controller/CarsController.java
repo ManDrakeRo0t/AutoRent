@@ -29,7 +29,7 @@ public class CarsController {
         if(!car.equals("def")){
             Car l = carService.getCar(car);
             if(l == null){
-                model.addAttribute("car","машина не найдена");
+                model.addAttribute("car",null);
             }else{
                 List<String> cities = punctsService.getCitiesForCar(l.getId());
                 model.addAttribute("cities",cities);
@@ -38,6 +38,7 @@ public class CarsController {
 
             return "car";
         }
+
         Iterable<Car> cars = carService.getAllCars();
         model.addAttribute("cars",cars);
         return "cars";

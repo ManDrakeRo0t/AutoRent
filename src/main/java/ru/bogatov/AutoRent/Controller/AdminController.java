@@ -2,6 +2,8 @@ package ru.bogatov.AutoRent.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -62,6 +64,12 @@ public class AdminController {
         return "redirect:/administration";
     }
 
+    @PostMapping("/deleteOrders")
+    public String deleteOrders(){
+        orderService.deletePastDueOrders();
+        return "redirect:/administration";
+    }
+
     @PostMapping("/addCar")
     public String addCar(@RequestParam("file") MultipartFile[] file, CarForm carForm,Model model) throws IOException {
         carService.addCar(file,carForm);
@@ -76,6 +84,14 @@ public class AdminController {
     @PostMapping("/editCar")
     public String editCar(@RequestParam Map<String,String> form){
         carService.saveCar(form);
+        return "redirect:/administration";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteOrder(@PathVariable String id, @AuthenticationPrincipal User user, Model model){
+
+        orderService.deleteOrder(Integer.parseInt(id));
+
         return "redirect:/administration";
     }
 

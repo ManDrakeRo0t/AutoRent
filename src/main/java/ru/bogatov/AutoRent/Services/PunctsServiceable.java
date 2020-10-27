@@ -12,4 +12,5 @@ public interface PunctsServiceable {
     List<String> getPunctsForCity(String name);
     List<Car> getCarsForCity(String name);
     Map<String,List<String>> getCitiesForCarsMap();
+    void deleteCar(String id);
 }
